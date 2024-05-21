@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
-if(strlen($_SESSION['alogin'])==0)
+if(strlen($_SESSION['login'])==0)
   { 
 header('location:index.php');
 }
@@ -14,10 +14,7 @@ else{?>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <!--[if IE]>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <![endif]-->
-    <title>MERU UNIVERSITY OF SCIENCE AND TECHNOLOGY | Admin Dash Board</title>
+    <title>MERU UNIVERSITY OF SCIENCE AND TECHNOLOGY | User Dash Board</title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
@@ -41,61 +38,51 @@ else{?>
                             </div>
 
         </div>
-            
+             
              <div class="row">
 
- <div class="col-md-3 col-sm-3 col-xs-6">
-                      <div class="alert alert-success back-widget-set text-center">
-                            <i class="fa fa-book fa-5x"></i>
-                                <?php 
-                                  $sql ="SELECT id from tblbooks ";
-                                  $query = $dbh -> prepare($sql);
-                                  $query->execute();
-                                  $results=$query->fetchAll(PDO::FETCH_OBJ);
-                                  $listdbooks=$query->rowCount();
-                                ?>
 
-
-                            <h3><?php echo htmlentities($listdbooks);?></h3>
-                      Books Listed
-                        </div>
-                    </div>
 
             
                  <div class="col-md-3 col-sm-3 col-xs-6">
                       <div class="alert alert-info back-widget-set text-center">
                             <i class="fa fa-bars fa-5x"></i>
                               <?php 
-                                $sql1 ="SELECT id from tblissuedbookdetails ";
+                                $sid=$_SESSION['stdid'];
+                                $sql1 ="SELECT id from tblissuedbookdetails where StudentID=:sid";
                                 $query1 = $dbh -> prepare($sql1);
+                                $query1->bindParam(':sid',$sid,PDO::PARAM_STR);
                                 $query1->execute();
                                 $results1=$query1->fetchAll(PDO::FETCH_OBJ);
                                 $issuedbooks=$query1->rowCount();
                               ?>
 
                             <h3><?php echo htmlentities($issuedbooks);?> </h3>
-                           Times Book Issued
+                            Book Issued
                         </div>
                     </div>
              
                <div class="col-md-3 col-sm-3 col-xs-6">
                       <div class="alert alert-warning back-widget-set text-center">
                             <i class="fa fa-recycle fa-5x"></i>
-                              <?php 
-                                $status=1;
-                                $sql2 ="SELECT id from tblissuedbookdetails where RetrunStatus=:status";
-                                $query2 = $dbh -> prepare($sql2);
-                                $query2->bindParam(':status',$status,PDO::PARAM_STR);
-                                $query2->execute();
-                                $results2=$query2->fetchAll(PDO::FETCH_OBJ);
-                                $returnedbooks=$query2->rowCount();
-                              ?>
+<?php 
+$rsts=0;
+$sql2 ="SELECT id from tblissuedbookdetails where StudentID=:sid and RetrunStatus=:rsts";
+$query2 = $dbh -> prepare($sql2);
+$query2->bindParam(':sid',$sid,PDO::PARAM_STR);
+$query2->bindParam(':rsts',$rsts,PDO::PARAM_STR);
+$query2->execute();
+$results2=$query2->fetchAll(PDO::FETCH_OBJ);
+$returnedbooks=$query2->rowCount();
+?>
 
                             <h3><?php echo htmlentities($returnedbooks);?></h3>
-                          Times  Books Returned
+                          Books Not Returned Yet
                         </div>
                     </div>
-</div>
+        </div>
+
+
             
     </div>
     </div>

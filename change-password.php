@@ -2,36 +2,43 @@
 session_start();
 include('includes/config.php');
 error_reporting(0);
-if(strlen($_SESSION['alogin'])==0)
-    {   
-header('location:index.php');
-}
-else{ 
-if(isset($_POST['change']))
-  {
-$password=md5($_POST['password']);
-$newpassword=md5($_POST['newpassword']);
-$username=$_SESSION['alogin'];
-  $sql ="SELECT Password FROM admin where UserName=:username and Password=:password";
-$query= $dbh -> prepare($sql);
-$query-> bindParam(':username', $username, PDO::PARAM_STR);
-$query-> bindParam(':password', $password, PDO::PARAM_STR);
-$query-> execute();
-$results = $query -> fetchAll(PDO::FETCH_OBJ);
-if($query -> rowCount() > 0)
-{
-$con="update admin set Password=:newpassword where UserName=:username";
-$chngpwd1 = $dbh->prepare($con);
-$chngpwd1-> bindParam(':username', $username, PDO::PARAM_STR);
-$chngpwd1-> bindParam(':newpassword', $newpassword, PDO::PARAM_STR);
-$chngpwd1->execute();
-$msg="Your Password succesfully changed";
-}
-else {
-$error="Your current password is wrong";  
-}
-}
 
+if (strlen($_SESSION['login']) == 0) {
+    header('location:index.php');
+} else {
+    if (isset($_POST['change'])) {
+        $password = $_POST['password'];
+        $newpassword = $_POST['newpassword'];
+        $confirmpassword = $_POST['confirmpassword'];
+        $email = $_SESSION['login'];
+
+        // Validate the inputs
+        if (empty($password) || empty($newpassword) || empty($confirmpassword)) {
+            $error = "All fields are required.";
+        } elseif ($newpassword !== $confirmpassword) {
+            $error = "New Password and Confirm Password do not match.";
+        } else {
+            // Check the current password
+            $sql = "SELECT Password FROM tblstudents WHERE EmailId = :email";
+            $query = $dbh->prepare($sql);
+            $query->bindParam(':email', $email, PDO::PARAM_STR);
+            $query->execute();
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+
+            if ($result && password_verify($password, $result['Password'])) {
+                // Current password is correct, update the password
+                $newpassword = password_hash($newpassword, PASSWORD_DEFAULT);
+                $update_sql = "UPDATE tblstudents SET Password = :newpassword WHERE EmailId = :email";
+                $update_query = $dbh->prepare($update_sql);
+                $update_query->bindParam(':email', $email, PDO::PARAM_STR);
+                $update_query->bindParam(':newpassword', $newpassword, PDO::PARAM_STR);
+                $update_query->execute();
+                $msg = "Your password has been changed successfully.";
+            } else {
+                $error = "Your current password is incorrect.";
+            }
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -40,7 +47,7 @@ $error="Your current password is wrong";
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>MERU UNIVERSITY OF SCIENCE AND TECHNOLOGY</title>
+    <title>MERU UNIVERSITY OF SCIENCE AND TECHNOLOGY | </title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
@@ -89,7 +96,7 @@ return true;
 <div class="container">
 <div class="row pad-botm">
 <div class="col-md-12">
-<h4 class="header-line">User Change Password</h4>
+<h4 class="header-line">Change Password</h4>
 </div>
 </div>
  <?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 

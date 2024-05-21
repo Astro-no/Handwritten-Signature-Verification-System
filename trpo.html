@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Initiative for Education</title>
+
+    <!-- Link to Normalize.css for consistent styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Link to custom stylesheet for additional styling -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header class="bg-dark text-white text-center">
+        <div class="container">
+            <h1 class="mb-4">Life Initiative for Education</h1>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-end">
+                <!-- Bootstrap navigation components -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#programs">Programs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#donate">Donate</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#get-involved">Get Involved</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#careers">Careers</a></li>
+                        <!-- Add other navigation links as needed -->
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home">
+        <h2>Welcome to our Website</h2>
+        <p>Brief overview of the organization's goals and impact.</p>
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Detailed information about the organization, its team, mission, and impact.</p>
+    </section>
+
+    <section id="programs">
+        <h2>Our Programs</h2>
+        <p>Explore our initiatives and their impact.</p>
+        <!-- Include links to individual program pages -->
+    </section>
+
+    <section id="blog">
+        <h2>Blog</h2>
+        <!-- Include recent blog posts or news articles -->
+        <div class="blog-post">
+            <h3>Recent Post Title</h3>
+            <p>Summary of the post content. <a href="#">Read more...</a></p>
+        </div>
+        <!-- Add more blog posts as needed -->
+    </section>
+
+    <section id="donate">
+        <h2>Donate</h2>
+        <!-- Donation options and secure payment information -->
+        <p>Support our mission by making a donation. Choose your preferred amount:</p>
+        <!-- Include donation buttons or forms -->
+    </section>
+
+    <section id="get-involved">
+        <h2>Get Involved</h2>
+        <p>Explore volunteer and internship opportunities. Submit your information below:</p>
+        <!-- Include a form for interested individuals -->
+    </section>
+
+    <section id="careers">
+        <h2>Careers</h2>
+        <!-- Current job openings and application instructions -->
+        <p>Join our team! View our current job openings and apply today.</p>
+        <!-- Include job listings and application details -->
+    </section>
+
+    <!-- New Sections -->
+
+    <section id="language-options">
+        <h2>Language Options</h2>
+        <!-- Language selector -->
+        <div>
+            <label for="language-select">Select Language:</label>
+            <select id="language-select">
+                <option value="english">English</option>
+                <option value="spanish">Spanish</option>
+                <option value="french">French</option>
+            </select>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <h2>Testimonials</h2>
+        <!-- Showcase quotes from educators, students, and community leaders -->
+        <div class="testimonial">
+            <blockquote>
+                "Quote goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            </blockquote>
+            <p class="author">- John Doe, Educator</p>
+        </div>
+        <!-- Add more testimonials as needed -->
+    </section>
+
+    <section id="resources">
+        <h2>Resources</h2>
+        <!-- Educational materials, research papers, and toolkits for educators and supporters -->
+        <p>Explore our resources for educators and supporters:</p>
+        <!-- Include download links and descriptions -->
+    </section>
+
+    <section id="social-media">
+        <h2>Connect With Us</h2>
+        <!-- Social media icons linking to organization profiles -->
+        <div class="social-icons">
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <!-- Add more social media icons as needed -->
+        </div>
+    </section>
+
+    <section id="accessibility">
+        <h2>Accessibility</h2>
+        <!-- Information about accessibility features -->
+        <p>We strive to make our website accessible to all users. If you encounter any issues, please contact us.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Information</h2>
+        <!-- Contact information in the footer -->
+        <p>Email: info@lifeinitiative.org | Phone: xxx-xxx-xxxx</p>
+    </section>
+
+    <footer>
+        <p>Contact us at info@lifeinitiative.org | Phone: xxx-xxx-xxxx</p>
+    </footer>
+
+    <!-- Link to Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Simple JavaScript for responsiveness -->
+    <script>
+        // Example: Toggle navigation menu for smaller screens
+        $(document).ready(function () {
+            const navToggle = $('.navbar-collapse');
+            const menuIcon = $('.navbar-toggler');
+
+            menuIcon.on('click', function () {
+                navToggle.toggleClass('show');
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
